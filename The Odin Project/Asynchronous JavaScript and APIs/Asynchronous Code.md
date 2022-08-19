@@ -485,4 +485,4 @@ The main promise returned from `Promise.all([..])` will only be fulfilled if and
 
 Remember to always attach a rejection/error handler to every promise, even and especially the one that comes back from `Promise.all([..])`. 
 
-
+##### Promise.race([..])
