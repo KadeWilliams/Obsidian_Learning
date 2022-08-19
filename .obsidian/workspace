@@ -1,0 +1,144 @@
+{
+  "main": {
+    "id": "cc23ddf2a9967973",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ba8d351cc979796",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "The Odin Project/Organizing your JavaScript Code/Objects and Object Constructors.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b43b7578a3f2da98",
+    "type": "split",
+    "children": [
+      {
+        "id": "38054addb682d7e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0f8936b6c31ebae8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "99145cd575d1f66b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "96fe5f04c65d4401",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "44e9b726b0df34fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "035d821b2f386eac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "30e590e2ebbab7f3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "The Odin Project/Organizing your JavaScript Code/Objects and Object Constructors.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3d52ffacc2270bbb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "The Odin Project/Organizing your JavaScript Code/Objects and Object Constructors.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f3764970254eaf14",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ba7667d4578fc2b4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "The Odin Project/Organizing your JavaScript Code/Objects and Object Constructors.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "7ba8d351cc979796",
+  "lastOpenFiles": [
+    "The Odin Project/Navigation.md",
+    "The Odin Project/JavaScript in the Real World/Form Validation with JavaScript.md",
+    "The Odin Project/Asynchronous JavaScript and APIs/Async and Await.md",
+    "The Odin Project/Asynchronous JavaScript and APIs/Working with APIs.md",
+    "The Odin Project/Asynchronous JavaScript and APIs/Asynchronous Code.md",
+    "The Odin Project/Organizing your JavaScript Code/Objects and Object Constructors.md",
+    "The Odin Project/JavaScript in the Real World/Linting.md",
+    "The Odin Project/Organizing your JavaScript Code/OOP Principles.md",
+    "The Odin Project/Organizing your JavaScript Code/Webpack.md",
+    "The Odin Project/Organizing your JavaScript Code/Classes.md"
+  ]
+}
