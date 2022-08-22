@@ -5,14 +5,21 @@
 
 
 ## Learning Outcomes
+- [x] What is a callback? 
 
-- [ ] What is a callback?
+A callback is a function within another function. It is how older JavaScript handles asynchronous code. 
 
-- [ ] What is a promise?
+- [x] What is a promise?
 
-- [ ] What are the circumstances under which promises are better than callbacks?
+A promise is a asynchronous handler function that can chain together functions and wait for resolutions. A promise is an object that might produce a value at some point in the future. 
 
-- [ ] What does the  `.then()` function do?
+- [x] What are the circumstances under which promises are better than callbacks?
+
+When callback hell is a very real possiblity. Avoid calling callbacks within callbacks. 
+
+- [x] What does the  `.then()` function do?
+
+Returns a resolution or rejection "Promise" object.
 
 ## Callbacks
 
@@ -486,3 +493,73 @@ The main promise returned from `Promise.all([..])` will only be fulfilled if and
 Remember to always attach a rejection/error handler to every promise, even and especially the one that comes back from `Promise.all([..])`. 
 
 ##### Promise.race([..])
+While  `Promise.all([..])` coordinates multiple Promises concurrently and assumes all are needed for fulfillment, somtimes you only want to respond to the "first Promise to cross the finish line", letting the other Promises fall away.
+
+This patten is classically called a "latch", but in Promises it's called a "race".
+
+`Promise.all([..])` also expects a single `array` argument, containing one or more Promises, thenables, or immediate values. It doesn't make much practical sense to have a race with immediate values, because the first one listed will obviously win -- like a foot race where one runner starts at the finish line. 
+
+Promises cannot be canceled -- and shouldn't be as that would destroy the external immutability trust discuessed in the "Promise Uncancelable" -- so they can only be silently ignored. 
+
+Is there anything in this pattern that proactively frees the reserved resource after the timeout, or otherwise cancels any side effects it may have had? What if all you wanted was to log the fact the promise function timed out?
+
+Some developers have proposed that Promises need a `finally()` callback registration, which is always called when a Promise resolves, and allows you to specify any cleanup that may be necessary. 
+
+#### Promise API Recap 
+##### new Promise(..) Constructor
+The *revealing constructor* `Promise()` must be used with `new`, and must be provided a function callback that is immediately called. This function is passed two function callbacks that act as resolution capabilities for the promise. We commonly label these `resolve()` and `reject()`
+
+`reject()` simply rejects the promise, but `resolve()` can either fulfill the promise or reject it, depending on what it's passed. If `resolve()` is passed an immediate, non-Promise, non-thenable value, then the promise is fulfilled with that value. 
+
+But if `resolved()` is passed a genuine Promise or thenable value, that value is unwrapped recursively, and whatever its final resolution/state is will be adopted by the promise.
+
+`Promise.resolve()` doesn't do anything if what you pass is already a genuine Promise; it just returns the value directly. So there's no overhed to calling `Promise.resolve()` on values that you don't know the nature of, if one happens to already be a genuine Promise. 
+
+##### then() and catch()
+Each Promise instance has `then()` and `catch()` methods, which allow registering of fulfillment and rejection handlers for the Promise. Once the Promise is resolved, one or the other of these handlers will be called, but not both, and it will always be called asynchronously .
+
+`then()` takes one or two parameters, the first for the fulfillment callback, and the second for the rejection callback. If either is omitted or is otherwise passed as a non-function value, a default callback is substituted respectively. The default fulfillment callback simply passes the message along, while the default rejection callback simply rethrows (propagates) the error reason it receives. 
+
+`catch()` takes only the rejection callback as a parameter, and automatically substitutes the default fulfillment callback, as just discussed. 
+
+`then()` and `catch()` also create and return a new promise, which can be used to express Promise chain flow control. If the fulfillment or rejection callbacks have an exception thrown, the returned promise is rejected. If either callback returns an immediate, non-Promise, non-thenable value, that value is set as the fulfillment for the returned promise. If the fulfillment handler specifically returns a promise or thenable value, that value is unwrapped and becomes the resolution of the returned promise. 
+
+##### Promise.all([]) and Promise.race([])
+These static helpers on the ES6 `Promise` API both create a Promise as their return value. The resolution of that promise is controlled entirely by the array of promises that you pass in. 
+
+For `Promise.all([])`, all the promises you pass in must fulfill for the returned promise to fulfill. If any promise is rejected, the main returned promise is immediately rejected, too. For fulfillment, you receive an `array` of all the passed in promises' fulfillment values. For rejection, you receive just the first promise rejection reason value. This pattern is classically called a "gate": all must arrive before the gate opens. 
+
+For `Promise.race([])` only the first promise to resolve (fulfillment or rejection) "wins", and whatever that resolution is becomes the resolution of the returned promise. This pattern is classically called a "latch": first one to open the latch gets through. 
+
+If an empty `array` is passed to `Promise.all([])`, it will fulfill immediately, but `Promise.race([])` will hang forever and never resolve.
+
+The ES6 `Promise` API is pretty simply and straightforward. It's at least good enough to serve the most basic of async cases, and is a good place to start when rearranging your code from callback hell to something better. 
+
+#### Promise Limitations 
+##### Sequence Error Handling
+The limitations of how Promises are designed -- how they chain, specifically -- creates a very easy pitfall where an error in a Promise chain can be silently ignored accidentally. 
+
+Because a Promise chain is nothing more than its constituent Promises wired together, there's no entity to refer to the entire chain as a single thing, which means there's no external way to observe any errors that may occur. 
+
+If you construct a Promise chain that has no error handling in it, any error anywhere in the chain will propagate indefinitely down the chain, until observed. So, in that specific case, having a reference to the last promise in the chain is enough, because you can register a rejection handler there, and it will be notified of any propagated errors. 
+
+##### Single Value
+Promises by definition only have a single fulfillment value or a single rejection reason. In simple examples, this isn't that big of a deal, but in more sophisticated scenarios, you may find this limiting. 
+
+The typical advice is to construct a values wrapper (such as an `object` or `array`) to contain these multiple messages. This solution works, but it can be quite awkward and tedious to wrap and unwrap your messages with every single step or your Promise chain. 
+
+##### Single Resolution
+One of the most intrinsic behaviors of Promises is that a Promise can only be resolved once (fulfillment or rejection). For many async use cases, you're only retrieving a value once, so this works fine. 
+
+But there's also a lot of async cases that fit into a different model -- one that's more akin to events and/or streams of data. It's not clear on the surface how well Promises can fit into such use cases, if at all. Without significant abstraction on top of Promises, they will completely fall short for handling multiple value resolution. 
+
+##### Inertia
+Promises offer a different paradigm, and as such, the approach to the code can be anywhere from just a little different to, in some cases, radically different. You have to be intentional about it, because Promises will not just naturally shake out from the same ol' ways of doing code that have served you thus far. 
+
+The act of wrapping a callback-expecting function to be a Promise-aware function is sometimes referred to as "lifting" or "promisifying". But there doesn't seem to be a standard term for what to call the resultant function other than a "lifted function". 
+
+##### Promise uncancelable
+Once you create a Promise and register a fulfillment and/or rejection handler for it, there's nothing external you can do to stop that progression if something else happens to make that task moot. 
+
+DO NOT CANCEL PROMISES
+
