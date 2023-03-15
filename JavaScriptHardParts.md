@@ -86,5 +86,5 @@ Callbacks and Higher Order Functions simplify our code and keep it DRY
 - Refine technical communication
 - Collaborate to solve the problem 
 
-
+# Closure 
 
