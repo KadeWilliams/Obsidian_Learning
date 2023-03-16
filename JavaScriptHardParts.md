@@ -87,4 +87,21 @@ Callbacks and Higher Order Functions simplify our code and keep it DRY
 - Collaborate to solve the problem 
 
 # Closure 
+- Closure is the most esoteric of JavaScript concepts 
+- Enables powerful pro-level functions like 'once' and 'memoize' 
+- Many JavaScript design patterns including the module pattern use closure
+- Build iterators, handle partial application and maintain state in an asynchronous world
+
+## Functions with memories
+- When our functions get called, we create a live store of data (local memory/variable environment/state) for that function's execution context
+- When the function finishes executing, its local memory is deleted (except the return value)
+- But what if our functions could hold on to live data between executions?
+- This would let our function definitions have an associated cache/persistent memory
+- But it all starts with us **returning a function from another function**
+
+Local Memory == State 
+- The live data at a particular moment in my application or function
+
+Where you define your functions determines what data it has access to when you call it
+
 
