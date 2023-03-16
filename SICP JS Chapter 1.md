@@ -30,4 +30,4 @@ _Infix notation_ - The convention of placing the operator between the operands
 Even with complex expressions, the interpreter always operates in the same basic cycle: It reads the statement typed by the user, evaluates the statement, and prints the result. This mode of operation is often expressed by saying that the interpreter runs in a _read-evaluate-print loop_. 
 
 # 1.1.2 Naming and the Environment
-A criticakl aspect 
+A critical aspect 
