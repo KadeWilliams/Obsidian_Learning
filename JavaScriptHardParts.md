@@ -104,4 +104,41 @@ Local Memory == State
 
 Where you define your functions determines what data it has access to when you call it
 
+JavaScript is ... P.L.S.R.D (Backpack)
+P -> Persistent
+L/S -> Lexical/Static
+S -> Scope
+R -> Reference
+D -> Data
+
+"Put the data in the functions _**closure**_"
+
+Where my data is saved determines what data I have access to when it is eventually run, wherever that may be. 
+
+```js
+function outer() {
+	let counter = 0;
+	function incrementCounter () {counter ++;}
+  return incrementCounter;
+}
+
+const myNewFunction = outer();
+myNewFunction();
+myNewFunction();
+```
+
+## The bond
+When a function is defined, it gets a bond to the surrounding Local Memory ("Variable Environment") in which it has been defined
+
+## The 'backpack'
+- We return incrementCounter's code (function definition) out of outer into global and give it a new name - myNewFunction
+- We **maintain the bond to the outer's live local memory** - it gets 'returned out' attached on the back of incrementCounter's function definition
+- So outer's local memory is now stored (attached) to myNewFunction even though outer's execution context is long gone
+- When we run myNewFunction in global, it will first look in its own local memory first (as we'd expect), but then in myNewFunction's 'backpack'
+
+## What we call this 'backpack'
+- Closed over 'Variable Environment' (C.O.V.E)
+- Persistent Lexical Scope Referenced Data (P.L.S.R.D.)
+- 'Backpack'
+- 'Closure'
 
