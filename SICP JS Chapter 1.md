@@ -121,3 +121,16 @@ p<sub>1</sub>
 : _p<sub>n</sub>_
 ? _e<sub>n</sub>_
 : _final-alternative-expression_
+
+We call a predicate together with its consequent expression a _clause_. 
+
+Logical composition operations
+- &&
+  - _Logical Conjunction_ (and)  
+- || 
+  - _Logical Disjunction_ (or)
+- ! 
+  - _Logical Negation_ (not)
+  - _Unary_ operator -> Takes only one argument 
+   
+
