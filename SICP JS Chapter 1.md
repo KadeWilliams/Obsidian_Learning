@@ -103,3 +103,21 @@ JavaScript uses applicative-order evaluation, partly because of the additional e
 The general form of a conditional expression: 
 
 _predicate ? consequent-expression : alternative-expression_
+
+Conditional expressions begin with a _predicate_ - that is, an expression whose value is either _true_ or _false_, two distinguished _boolean_ values in JavaScript. The _predicate_ is followed by a question mark, the _consequent-expression_, a colon, and finally the _alternative-expression_.
+
+To evaluate a conditional expression, the interpreter starts by evaluating the _predicate_ of the expression. If the _predicate_ evaluates to true, the interpreter evaluates the _consequent-expression_ and returns its value as the value of the conditional. If the _predicate_ evaluates to false, it evaluates the _alternative-expression_ and returns its value as the values of the conditional.
+
+The word _predicate_ is used for operators and functions that return true or false, as well as for expressions that evaluate to true or false. 
+
+In JavaScript, we express a case analysis with multipole cases by nesting conditional expressions as alternative expresions inside other conditional expressions.
+
+The general form of a case analysis is: 
+p<sub>1</sub>
+? e<sub>1</sub>
+: _p<sub>2</sub>_
+? _e<sub>2</sub>_
+...
+: _p<sub>n</sub>_
+? _e<sub>n</sub>_
+: _final-alternative-expression_
