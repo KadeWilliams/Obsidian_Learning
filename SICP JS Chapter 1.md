@@ -175,3 +175,20 @@ function cube_root(guess, x) {
 cube_root(3, 27);
 ```
 
+# 1.1.8 Functions as Black-Box abstractions
+A program can be viewed as a cluster of functions that mirror the decomposition of the problem into subproblems. The importance of this decomposition strategy is not simply that one is dividing the program into parts. After all, we could take any large program and divide it into parts. Rather, it is crucial each function accomplishes an identifiable task that can be used as a module in defining other funcitons. We are able to regard portions of the program as "black box(es)". We are not at that moment concerned with _how_ the funciton computes its result, only with the fact _that_ it computes. 
+
+So a function should be able to suppress detail. The users of the function may not have written the function themselves, but may have obtained it from another programmer as a black box. A user should not need to know how the function is implemented in order to use it. 
+
+## Local Names
+One detail of a function's implementation that should not matter to the user of the function is the implementer's choice of names for the function's parameters. 
+
+A parameter of a function has a very special role in the function declaration, in that it doesn't matter what name the parameter has. Such a name is called _bound_, and we say that the function declaration _binds_ its parameters. If a name is not bound, we say that it is _free_. The set of statements for which a binding declares a name is called the _scope_ of that name. In a function declaration, the bound names declared as the parameters of the function have the body of the function as their scope. 
+
+## Internal Declaraions and Block Structure 
+Any matching pair of braces designates a _block_, and declarations inside the block are local to the block, this is called _block_ structure. 
+
+_Lexical Scoping_ - setting the scope or range of functionality or a variable so that it may be called (referenced) from within the block of code in which it is defined
+
+# 1.2 Functions and the Processes They Generate
+
