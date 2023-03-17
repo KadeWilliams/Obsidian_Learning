@@ -133,4 +133,45 @@ Logical composition operations
   - _Logical Negation_ (not)
   - _Unary_ operator -> Takes only one argument 
    
+# 1.1.7 Square Roots by Newton's Method
+How does one compute square roots? The most common way is to use Newton's method of successive approximations, which says that whenever we have a guess _y_ for the value of the square root of a number _x_, we can perform a simple manipulation to get a better guess (one closer to the actual square root) by averaging _y_ with _x/y_. 
+
+![image](https://user-images.githubusercontent.com/59847831/225989759-b4012cc1-0608-470e-8027-d5b0d126b31a.png)
+
+The evaluation of a return expression needs to evaluate its arguments first, including the recursive call of the argument, regardless of whether the predicate evaluates to true or false. The same of course happens with the recursive call, and thus the function never actually gets applied. 
+
+# Exercise 1.7
+Key facts about floating point numbers: 
+- Because each number is encoded on a finite number of bits, the number of floating point numbers that can be represented in a computer is finite
+- Most of the time, a floating point number is an approximation of a real number. 
+- As the size of the number represented increases, the size of the "gap" between two consecutive numbers will increase step by step
+- Although there are infinitely many integers, in most programs the result of integer computations can be stored in 32 bits. In contrast, given any fixed number of bits, most calculations with real numbers will produce quantities that cannot be exactly represented using that many bits. **Therefore the result of a floating-point calculation must often be rounded in order to fit back into its finite representation.**
+
+# Exercise 1.8
+```js
+function abs(x) {
+    return x >= 0 ? x : - x;
+}
+
+function cube(x) {
+    return x * x * x;
+}
+
+function is_good_enough(guess, x) {
+    return abs(cube(guess) - x) < 0.001;
+}
+function div3(x, y) {
+     return (x + y) / 3;
+}
+function improve(guess, x) {
+    return div3(x / (guess * guess), 2 * guess);
+}
+function cube_root(guess, x) {
+    return is_good_enough(guess, x)
+           ? guess
+           : cube_root(improve(guess, x), x);
+}
+
+cube_root(3, 27);
+```
 
