@@ -86,5 +86,20 @@ In addition to compound functions, any JavaScript environment provides primitive
 # 1.1.5 The Substitution Model for Function Application
 The interpreter evaluates the elements of the application and applies the function to the arguments. 
 
+To apply a compound function to arguments, evaluate the return expression of the function with each parameter replaced by the corresponding argument. 
 
+_Substitution Model_ for function application can be taken as a model that determines the "meaning" of function application.
+- The purpose of the substitution is to help us think about function application, not to provide a descriptioon of how the interpreter really works. Typical interpreters do not evaluate function applications by manipulating the text of a funciton to substitute values for the parameters. In practice, the "substitution" is accomplished by using a local environment for the parameters. 
 
+## Applicative order versus normal order
+In section 1.1.4, the interpreter first evaluated the function and argument expressions and then applied the resulting function to the resulting arguments. An alternative evaluation model would not evaluate the arguments until their values were needed. Instead it would first substitute argument expressions for parameters until it obtained an expression involving only operators and primitive functions, and would then perform the evaluation.  
+
+_Normal-Order evaluation_ = "fully expand and then reduce" 
+_Applicative-Order evaluation_ = "evaluate the arguments and then apply"
+
+JavaScript uses applicative-order evaluation, partly because of the additional efficiency obtained from avoiding multiple evaluations of expressions. Because normal-order evaluation becomes much more complicated to deal with when we leave the realm of functions that can be modeled by substitution. 
+
+# 1.1.6 Conditional Expressions and Predicates 
+The general form of a conditional expression: 
+
+_predicate ? consequent-expression : alternative-expression_
