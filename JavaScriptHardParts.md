@@ -142,3 +142,19 @@ When a function is defined, it gets a bond to the surrounding Local Memory ("Var
 - 'Backpack'
 - 'Closure'
 
+## Closure gives our functions persistent memories and entirely new toolkit for writing professional code
+- Helper functions: Everyday professional helper functions like 'once' and 'memoize'
+- Iterators and generators: Which use lexical scoping and closure to achieve the most contemporary patterns for handling data in JavaScript
+- Module pattern: Preserve state for the life of an application without polluting the global namespace
+- Asynchronous JavaScript: Callbacks and Promises rely on closure to persist state in an asynchronous environment
+
+```js
+function addByX(x) {
+	let summand = x; // P.L.S.R.D
+	const addBySummand = (y) => {
+		console.log(x + y);
+  }
+  return addBySummand; 
+}
+```
+
