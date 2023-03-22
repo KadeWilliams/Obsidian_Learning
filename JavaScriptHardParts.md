@@ -150,11 +150,125 @@ When a function is defined, it gets a bond to the surrounding Local Memory ("Var
 
 ```js
 function addByX(x) {
-	let summand = x; // P.L.S.R.D
-	const addBySummand = (y) => {
-		console.log(x + y);
+  return function(y) {
+    return y + x
   }
-  return addBySummand; 
 }
+
+function once(func) {
+  let executed = false;
+  let result;
+  return function(num) {
+    if (!executed) {
+      executed = true;
+      result = func(num); 
+    }
+    return result;
+  }
+}
+function after(count, func) {
+	return function() {
+    count -= 1;
+    if (count == 0) {
+      return func(); 
+    }
+  } 
+}
+
+const called = function() { console.log('hello') };
+const afterCalled = after(3, called);
+afterCalled(); // => nothing is printed
+afterCalled(); // => nothing is printed
+
+function delay(func, wait) {
+    setTimeout(() => {
+      	return func()
+    	}, wait); 
+}
+delay(afterCalled, 3000)
+
+function saveOutput(func, magicWord) {
+	const obj = {}
+  return function(val) {
+    if (val == magicWord) {
+      return obj; 
+    } 
+    
+    if (typeof val == 'number') {
+      let value = func(val);
+      obj[val] = value
+      return val 
+  	}
+  }
+}
+
+// const multiplyBy2 = function(num) { return num * 2; };
+// const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+// console.log(multBy2AndLog(2)); // => should log 4
+// console.log(multBy2AndLog(9)); // => should log 18
+// console.log(multBy2AndLog('boo')); // => should log { 2: 4, 9: 18 }
+
+// stack 
+function cycleIterator(array) {
+	return function() {
+    let cur = array.shift(); 
+    array.push(cur); 
+		return cur;     
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
+const getDay = cycleIterator(threeDayWeekend);
+console.log(getDay()); // => should log 'Fri'
+console.log(getDay()); // => should log 'Sat'
+console.log(getDay()); // => should log 'Sun'
+console.log(getDay()); // => should log 'Fri'
+
+function defineFirstArg(func, arg) {
+  return function(val) {
+  	return func(arg, val)
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+const subtract = function(big, small) { return big - small; };
+const subFrom20 = defineFirstArg(subtract, 20);
+console.log(subFrom20(5)); // => should log 15
+
+function defineFirstArg(func, arg) {
+  return function(val) {
+  	return func(arg, val)
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+// const subtract = function(big, small) { return big - small; };
+// const subFrom20 = defineFirstArg(subtract, 20);
+// console.log(subFrom20(5)); // => should log 15
+
+//challenge 12
+function censor() {
+  const obj = {}; 
+  return function(...args) {
+    if (args[1]){
+			obj[args[0]] = args[1]
+    } else {
+      let newStr = args[0];
+      for (let key in obj) {
+	      newStr = newStr.replace(key, obj[key])
+      }
+      return newStr
+    }
+    return obj
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+const changeScene = censor();
+changeScene('dogs', 'cats');
+changeScene('quick', 'slow');
+console.log(changeScene('The quick, brown fox jumps over the lazy dogs.')); // => should log 'The slow, brown fox jumps over the lazy cats.'
+
 ```
 
