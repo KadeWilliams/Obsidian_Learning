@@ -301,5 +301,199 @@ myNewFunc1(); // => 1
 myNewFunc1(); // => 2
 myNewFunc2(); // => 1
 myNewFunc2(); // => 2
+
+function roulette(num) {
+  let _num = num + 1 
+	return function() {
+		_num -= 1
+    return _num > 1 
+    			? "spin"
+    			: _num > 0
+    			? "win"
+    			: "pick a number to play again"
+    
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+// const play = roulette(3);
+// console.log(play()); // => should log 'spin'
+// console.log(play()); // => should log 'spin'
+// console.log(play()); // => should log 'win'
+// console.log(play()); // => should log 'pick a number to play again'
+// console.log(play()); // => should log 'pick a number to play again'
+
+function average() {
+  let _count = 0; 
+	let _total = 0;
+  let _average = 0; 
+  return function(number = null) {
+    if (number) {
+      _count++; 
+      _total += number;
+      _average = _total/_count;
+    }
+    return _average; 
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+// const avgSoFar = average();
+// console.log(avgSoFar()); // => should log 0
+// console.log(avgSoFar(4)); // => should log 4
+// console.log(avgSoFar(8)); // => should log 6
+// console.log(avgSoFar()); // => should log 6
+// console.log(avgSoFar(12)); // => should log 8
+// console.log(avgSoFar()); // => should log 8
+
+function makeFuncTester(arrOfTests) {
+  return function(func) {
+    return arrOfTests.every(arr => func(arr[0]) == arr[1])
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+// const capLastTestCases = [];
+// capLastTestCases.push(['hello', 'hellO']);
+// capLastTestCases.push(['goodbye', 'goodbyE']);
+// capLastTestCases.push(['howdy', 'howdY']);
+// const shouldCapitalizeLast = makeFuncTester(capLastTestCases);
+// const capLastAttempt1 = str => str.toUpperCase();
+// const capLastAttempt2 = str => str.slice(0, -1) + str.slice(-1).toUpperCase();
+// console.log(shouldCapitalizeLast(capLastAttempt1)); // => should log false
+// console.log(shouldCapitalizeLast(capLastAttempt2)); // => should log true
+
+function makeHistory(limit) {
+  const _history = []; 
+  return function(str) {
+    if (str == "undo") {
+      if (_history.length) {
+	      return _history.shift() + " undone"; 
+      }
+      return "nothing to undo"; 
+    }
+		if (_history.length == limit) {
+	    _history.unshift(str);
+      _history.pop();
+    } else {
+	    _history.unshift(str);
+    }
+    
+    return str + " done";
+  }
+}
+
+// /*** Uncomment these to check your work! ***/
+// const myActions = makeHistory(2);
+// console.log(myActions('jump')); // => should log 'jump done'
+// console.log(myActions('undo')); // => should log 'jump undone'
+// console.log(myActions('walk')); // => should log 'walk done'
+// console.log(myActions('code')); // => should log 'code done'
+// console.log(myActions('pose')); // => should log 'pose done'
+// console.log(myActions('undo')); // => should log 'pose undone'
+// console.log(myActions('undo')); // => should log 'code undone'
+// console.log(myActions('undo')); // => should log 'nothing to undo'
+
+function blackjack(array) {
+  let total; 
+  return function Dealer(arg1, arg2) {
+	  let counter = 0; 
+    total = arg1 + arg2
+    return function Player() {
+      
+      if (total == "bust") {
+        return "are you done!"
+      }
+      
+      if (counter == 0) {
+        counter++;
+        return total; 
+      }
+      
+      if (array.length > 0) {
+	      total += array.shift()
+        if (total > 21) {
+          total = "bust";        
+        }
+        return total;  
+      }
+			return "out of cards"
+    }
+  } 
+}
+
+// /*** Uncomment these to check your work! ***/
+
+// /*** DEALER ***/
+const deal = blackjack([2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11]);
+
+// /*** PLAYER 1 ***/
+// const i_like_to_live_dangerously = deal(4, 5);
+// console.log(i_like_to_live_dangerously()); // => should log 9
+// console.log(i_like_to_live_dangerously()); // => should log 11
+// console.log(i_like_to_live_dangerously()); // => should log 17
+// console.log(i_like_to_live_dangerously()); // => should log 18
+// console.log(i_like_to_live_dangerously()); // => should log 'bust'
+// console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
+// console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
+
+// // /*** BELOW LINES ARE FOR THE BONUS ***/
+
+// // /*** PLAYER 2 ***/
+// const i_TOO_like_to_live_dangerously = deal(2, 2);
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 4
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 15
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 19
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 'bust'
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
+// console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
+
+// // /*** PLAYER 3 ***/
+// const i_ALSO_like_to_live_dangerously = deal(3, 7);
+// console.log(i_ALSO_like_to_live_dangerously()); // => should log 10
+// console.log(i_ALSO_like_to_live_dangerously()); // => should log 13
+// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'bust'
+// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
+// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
+
+// const four = deal(2, 8);
+// console.log(four());
+// console.log(four());
+// console.log(four());
+// console.log(four());
+// console.log(four());
+// const five = deal(5, 3);
+// console.log(five());
+// console.log(five());
+// console.log(five());
+// console.log(five());
+// console.log(five());
+// const six  = deal(9, 5);
+// console.log(six());
+// console.log(six());
+// console.log(six());
+// console.log(six());
+// console.log(six());
+// console.log(six());
+// console.log(six());
+
+// const seven = deal(2, 4);
+// console.log(seven());
+// console.log(seven());
+// console.log(seven());
+// console.log(seven());
+
+// const eight = deal(2, 2);
+// console.log(eight());
+// console.log(eight());
+// console.log(eight());
+// console.log(eight());
+
+// const nine = deal(2, 2); 
+// console.log(nine()); 
+// console.log(nine()); 
+// console.log(nine()); 
+// console.log(nine()); 
+// console.log(nine()); 
 ```
 
