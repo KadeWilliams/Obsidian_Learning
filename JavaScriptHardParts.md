@@ -270,5 +270,36 @@ changeScene('dogs', 'cats');
 changeScene('quick', 'slow');
 console.log(changeScene('The quick, brown fox jumps over the lazy dogs.')); // => should log 'The slow, brown fox jumps over the lazy cats.'
 
+function createSecretHolder(secret) {
+	let _secret = secret;
+  return {
+  	getSecret() {
+      return _secret;
+    },
+    setSecret(secret) {
+      _secret = secret;
+    }
+  }
+}
+
+const obj = createSecretHolder(5)
+console.log(obj.getSecret()); // => returns 5
+obj.setSecret(2)
+console.log(obj.getSecret()); // => returns 2
+
+function callTimes() {
+	let _count = 0;
+  return function() {
+    _count++; 
+    console.log(_count);
+  }
+}
+
+let myNewFunc1 = callTimes();
+let myNewFunc2 = callTimes();
+myNewFunc1(); // => 1
+myNewFunc1(); // => 2
+myNewFunc2(); // => 1
+myNewFunc2(); // => 2
 ```
 
