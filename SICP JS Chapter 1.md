@@ -176,7 +176,7 @@ cube_root(3, 27);
 ```
 
 # 1.1.8 Functions as Black-Box abstractions
-A program can be viewed as a cluster of functions that mirror the decomposition of the problem into subproblems. The importance of this decomposition strategy is not simply that one is dividing the program into parts. After all, we could take any large program and divide it into parts. Rather, it is crucial each function accomplishes an identifiable task that can be used as a module in defining other funcitons. We are able to regard portions of the program as "black box(es)". We are not at that moment concerned with _how_ the funciton computes its result, only with the fact _that_ it computes. 
+A program can be viewed as a cluster of functions that mirror the decomposition of the problem into subproblems. The importance of this decomposition strategy is not simply that one is dividing the program into parts. After all, we could take any large program and divide it into parts. Rather, it is crucial each function accomplishes an identifiable task that can be used as a module in defining other functions. We are able to regard portions of the program as "black box(es)". We are not at that moment concerned with _how_ the funciton computes its result, only with the fact _that_ it computes. 
 
 So a function should be able to suppress detail. The users of the function may not have written the function themselves, but may have obtained it from another programmer as a black box. A user should not need to know how the function is implemented in order to use it. 
 
@@ -191,4 +191,3 @@ Any matching pair of braces designates a _block_, and declarations inside the bl
 _Lexical Scoping_ - setting the scope or range of functionality or a variable so that it may be called (referenced) from within the block of code in which it is defined
 
 # 1.2 Functions and the Processes They Generate
-
