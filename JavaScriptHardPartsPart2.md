@@ -234,6 +234,34 @@ setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefine
 setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
 ```
 
+# ES6+ Solution (Promises)
+Using two pronged "facade" functions that both: 
+- Initiate background web browser work and
+- Return a placeholder object (promise) immediately in JavaScript
 
+## _then_ method and functionality to call on completion
+- any code we want to run on the returned data must also be saved on the promise object 
+- added using .then() method to the hidden property 'onFulfillment'
+- Promise objects will automatically trigger the attached function to run (with its input being the returned data) 
 
+## Promises 
+**Problems**
+- 99% of devs have no idea how they're working on under the hood
+- Dubugging becomes super-hard as a result
+- Developers fail technical interviews
+
+**Benefits**
+- Cleaner readable style with pseudo-synchronous style code 
+- Nice error handling process
+
+## We have rules for the execution of our asynchronously delayed code
+Hold promise-deferred function in a microtask queue and callback function in a task queue (Callback queue) when the Web Browser Feature (API) finishes 
+- Add the function to the Call stack (i.e. run the function) when:
+	- Call stack is empty & all global code run (Have the Event Loop check this condition)
+Prioritize functions in the microtask queue over the Callback queue 
+
+## Promises, Web APIs, the Callback & Microtask Queues and Event loop enable:
+- **Non-blocking applications**: This means we don't have to wait in a single thread and don't block further code from running
+- **However long it takes**: We cannot predict when our Browser feature's work will finish so we let JS handle _automatically_ running the function on its completion
+- **Web applications**: Asynchronous JavaScript is the backbone of the modern web..letting us build fast 'non-blocking' applications
 
