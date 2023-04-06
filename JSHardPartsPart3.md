@@ -90,3 +90,11 @@ user1.increment();
 - **Problems**: Each time we create a new user we make space in our computer's memory for all our data and functions. But our functions are just copies.
 - **Benefits**: It's simple and easy to reason about! 
 
+**this** -> implicit parameter whatever is calling the method 'this' is bound to that 
+
+## What if we want to confirm our user1 has the property score
+We can use the hasOwnProperty method - but where is it? Is it on user1? 
+
+all objects have a __proto__ property by default which defaults to linking to a big object - Object.prototype full of (somewhat) useful functions
+
+We get access to it via userFunctionStore's __proto__ property - the chain 
