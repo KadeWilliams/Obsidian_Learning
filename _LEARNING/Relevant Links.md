@@ -1,6 +1,6 @@
 # Learning
 
-[Front End Masters](https://frontendmasters.com/)
+[Front End Masters](https://frontendmasters.com/) (All titles correspond to Frontend Masters Titles)
 - [[JavaScript The Hard Parts]]
 - [[Deep JavaScript Foundations (YDKJS)]]
 - [[Complete Intro to React]]
@@ -11,6 +11,9 @@
 - [[Functional JavaScript First Steps]]
 - [[The Last Algorithms Course You'll Need]]
 	- [The Last Algorithms Course You'll Need](https://theprimeagen.github.io/fem-algos/lessons/introduction/intro)
+-  [[The Hard Parts of Functional JavaScript]]
+-  [[The Hard Parts of Object Oriented JavaScript]]
+-  [[The Hard Parts of Servers & Node.js]]
  
 
 [Development Patterns](https://www.patterns.dev/posts)
