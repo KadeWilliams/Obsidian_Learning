@@ -90,6 +90,18 @@ user1.increment();
 - **Problems**: Each time we create a new user we make space in our computer's memory for all our data and functions. But our functions are just copies.
 - **Benefits**: It's simple and easy to reason about! 
 
+
+## Solution 2: Using the prototype chain
+**Problems**: No problems! It's beautiful. Maybe a little long-winded
+
+Write this every single time - but it's 6 words!
+
+```js
+const newUser = Object.create(userFunctionStore);
+...
+return newUser;
+```
+**Benefits**: Super sophisticated but not standard
 **this** -> implicit parameter whatever is calling the method 'this' is bound to that 
 
 ## What if we want to confirm our user1 has the property score
@@ -98,3 +110,99 @@ We can use the hasOwnProperty method - but where is it? Is it on user1?
 all objects have a __proto__ property by default which defaults to linking to a big object - Object.prototype full of (somewhat) useful functions
 
 We get access to it via userFunctionStore's __proto__ property - the chain 
+
+Every other language:
+- while you're inside the method, the pertinent object, the object we really care about doing stuff with the data, is throughout, going to be the object we're running the method on, even if we declare other functions inside  
+
+The `this` assignment is lexically scoped 
+
+We don't want to use arrow functions for our methods on objects, but for the functions inside of them that make use of this. If we define a method using an arrow function on the object we lose the ability to use `this` it becomes lexically scoped to the global() `this`
+
+## Solution 3: Intoducing the keyword that automates the hard work: `new`
+
+When we call the function that returns an object with **_new_** in front we automate 2 things
+1. Create a new user object
+2. Return the new user object 
+
+```js
+const user1 = new userCreator("Eva", 9);
+const user2 = new userCreator("Tim", 5);
+
+```
+
+But now we need to adjust how we write the body of userCreator - how can we: 
+- Refer to the auto-created object?
+- Know where to put our single copies of functions?
+
+If we use a `new` keyword, the automatically created object inside of the execution context is going to be labeled as `this`
+
+### The new keyword automates a lot of our manual work
+
+```js
+function userCreator(name, score) {
+  this.name = name;
+  this.score = score;
+};
+
+userCreator.prototype.increment = function() { this.score++; };
+userCreator.prototype.login = function() { console.log("login"); }; 
+
+const user1 = new userCreator("Will", 3);
+
+user1.increment(); 
+```
+
+"Functions are both **objects** and **functions** in JavaScript"
+- Every function when it is created also has an object attached to it that allows us to create and store on properties 
+
+
+**How is inheritance defined?**
+- An object, objA, inherits another object, objC, if objA and objC are connected through any number of __proto__. So if objA has __proto__ equal to objB, and objB has __proto__ equal to objC, then objA inherits objB and objC, while objB inherits objC. 
+
+**What is meant by inheritance**
+- It means any inheriting object can _use_ any property of inherited object.
+
+**What is Function.prototype?**
+- It is the object whom **__proto__** of every _function object_ refers. This means every _Function object_ has access to properties of Function.prototype, since every _Function object_ inherits the Function.prototype object. This also means that if a _method_ property is added to the Function.prototype object, it would be available to all the possible _function objects_ in JavaScript. 
+
+**_this.prototype[name] = func_;**
+this refers to the _Function object_ when the 'method' is invoked from the _Function objects_ like Number, String, etc. Which means we now have a new property in the _Function object_ with name "name", and its a function 'func'.
+
+**Benefits**:
+- Faster to write. Often used in practice in professional code
+
+**Problems**:
+- 95% of developers have no idea how it works and therefore fail interviews
+- We have to upper case first letter of the function so we know it requires `new` to work!
+
+## Solution 4: The class 'syntactic sugar'
+We're writing our shared methods separately from our object 'constructor' itself (off in the userCreator.prototype object)
+
+Other languages let us do this all in one place.
+
+```js
+class UserCreator {
+------------------------------>   
+  constructor (name, score) {   function userCreator(name, score {
+    this.name = name;             this.name = name;
+    this.score = score;           this.score = score;
+  }                             }
+------------------------------> 
+  increment() { this.score++; }      userCreator.prototype.increment = function () { this.score++; };
+  login () { console.log("login"); } userCreator.prototype.login = function () { console.log("login"); };
+}
+------------------------------> 
+const user1 = new UserCreator("Eva", 9); 
+user1.increment();
+```
+
+When we declare a `class` we get a function/object combo that's returned to the new object that class creates 
+
+The `constructor` is the `function` 
+
+**Benefits**:
+- Emerging as a new standard
+- Feels more like style of other languages
+
+**Problems**:
+- 99% of developers have no idea how it works and therefore fail interviews
